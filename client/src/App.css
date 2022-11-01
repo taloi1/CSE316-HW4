@@ -141,6 +141,7 @@ body {
 }
 
 #add-list-button {
+  pointer-events: auto;
   float: left;
 }
 
