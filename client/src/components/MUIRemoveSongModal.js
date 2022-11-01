@@ -45,8 +45,8 @@ export default function MUIRemoveSongModal() {
         id="remove-song-modal"
         className={modalClass}
         data-animation="slideInOutLeft">
-        <div className="modal-root" id='verify-remove-song-root'>
-            <div className="modal-north">
+        <div className="modal-dialog" id='verify-remove-song-root'>
+            <div className="modal-header">
                 Remove {songTitle}?
             </div>
             <div className="modal-center">

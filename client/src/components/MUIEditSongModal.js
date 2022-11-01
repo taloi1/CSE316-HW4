@@ -82,11 +82,11 @@ export default function MUIEditSongModal() {
                                 </div> 
                                 <div class="col-right">
                                 <input 
-                                    id="edit-song-modal-youTubeId-textfield" 
+                                    id="edit-song-modal-artist-textfield" 
                                     className='modal-textfield' 
                                     type="text" 
-                                    defaultValue={youTubeId} 
-                                    onChange={handleUpdateYouTubeId} /><br/>
+                                    defaultValue={artist} 
+                                    onChange={handleUpdateArtist} /><br/>
                                 </div>
                                 <div class="col-left">
                                     <label for="edit-song-modal-youtube-id">Youtube Id:</label>
