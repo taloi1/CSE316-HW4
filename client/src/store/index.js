@@ -330,6 +330,7 @@ function GlobalStoreContextProvider(props) {
     }
     store.deleteMarkedList = function() {
         store.deleteList(store.listIdMarkedForDeletion);
+        store.loadIdNamePairs();
         store.hideModals();
     }
     // THIS FUNCTION SHOWS THE MODAL FOR PROMPTING THE USER

@@ -38,15 +38,15 @@ export default function MUIRemoveSongModal() {
 
     return (
         <Modal
-            open={store.listMarkedForDeletion !== null}
+            open={store.currentSong !== null}
         >
             <Box sx={style}>
             <div
         id="remove-song-modal"
         className={modalClass}
         data-animation="slideInOutLeft">
-        <div className="modal-root" id='verify-remove-song-root'>
-            <div className="modal-north">
+        <div className="modal-dialog" id='verify-remove-song-root'>
+            <div className="modal-header">
                 Remove {songTitle}?
             </div>
             <div className="modal-center">
