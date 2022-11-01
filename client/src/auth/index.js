@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom'
-import api, { loginUser } from './auth-request-api'
+import api from './auth-request-api'
 
 const AuthContext = createContext();
 console.log("create AuthContext: " + AuthContext);
