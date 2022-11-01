@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom'
-import api from './auth-request-api'
+import api, { loginUser } from './auth-request-api'
 
 const AuthContext = createContext();
 console.log("create AuthContext: " + AuthContext);
@@ -78,7 +78,7 @@ function AuthContextProvider(props) {
                     user: response.data.user
                 }
             })
-            history.push("/login");
+            auth.loginUser(email,password);
         }
     }
 
