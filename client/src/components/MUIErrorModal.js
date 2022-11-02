@@ -1,8 +1,11 @@
 import { useContext } from 'react'
 import AuthContext from '../auth';
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import Stack from '@mui/material/Stack';
+import { Alert } from '@mui/material';
+import AlertTitle from '@mui/material/AlertTitle';
+import Button from '@mui/material/Button';
 
 const style = {
     position: 'absolute',
@@ -27,21 +30,15 @@ export default function MUIErrorModal() {
         <Modal
             open={auth.errorMessage !== ""}
         >
-            
-            <Box sx={style}>
-                <div className="modal-dialog">
-                <header className="dialog-header">
+            <Stack sx={{ width: '40%', marginLeft: '30%', marginTop: '20%' }} spacing={2}>
+                <Alert severity="error">
+                    <AlertTitle>Error</AlertTitle>
                     {message}
-                </header>
-                <div id="confirm-cancel-container">
-                    <button
-                        id="dialog-no-button"
-                        className="modal-button"
-                        onClick={handleCloseModal}
-                    >Close</button>
-                </div>
-            </div>
-            </Box>
+                    <Button color="primary" size="small" onClick={handleCloseModal}>
+                            Close
+                    </Button>
+                </Alert>
+            </Stack>
         </Modal>
     );
 }
