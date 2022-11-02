@@ -31,9 +31,7 @@ export default function LoginScreen() {
     };
 
     let modalJSX = "";
-    console.log(auth.errorMessage);
     if (auth.errorMessage !== "") {
-        console.log("OK");
         modalJSX = <MUIErrorModal />;
     }
 
