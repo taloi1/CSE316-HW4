@@ -10,13 +10,15 @@ export const AuthActionType = {
     GET_LOGGED_IN: "GET_LOGGED_IN",
     LOGIN_USER: "LOGIN_USER",
     LOGOUT_USER: "LOGOUT_USER",
-    REGISTER_USER: "REGISTER_USER"
+    REGISTER_USER: "REGISTER_USER",
+    ERROR: "ERROR",
 }
 
 function AuthContextProvider(props) {
     const [auth, setAuth] = useState({
         user: null,
-        loggedIn: false
+        loggedIn: false,
+        errorMessage: "",
     });
     const history = useHistory();
 
@@ -30,25 +32,36 @@ function AuthContextProvider(props) {
             case AuthActionType.GET_LOGGED_IN: {
                 return setAuth({
                     user: payload.user,
-                    loggedIn: payload.loggedIn
+                    loggedIn: payload.loggedIn,
+                    errorMessage: "",
                 });
             }
             case AuthActionType.LOGIN_USER: {
                 return setAuth({
                     user: payload.user,
-                    loggedIn: true
+                    loggedIn: true,
+                    errorMessage: "",
                 })
             }
             case AuthActionType.LOGOUT_USER: {
                 return setAuth({
                     user: null,
-                    loggedIn: false
+                    loggedIn: false,
+                    errorMessage: "",
                 })
             }
             case AuthActionType.REGISTER_USER: {
                 return setAuth({
                     user: payload.user,
-                    loggedIn: true
+                    loggedIn: true,
+                    errorMessage: "",
+                })
+            }
+            case AuthActionType.ERROR: {
+                return setAuth({
+                    user: null,
+                    loggedIn: true,
+                    errorMessage: payload.errorMessage,
                 })
             }
             default:
@@ -83,6 +96,12 @@ function AuthContextProvider(props) {
             }
         } catch (error) {
             console.log(error.response.data.errorMessage);
+            authReducer({
+                type: AuthActionType.ERROR,
+                payload: {
+                    errorMessage: error.response.data.errorMessage
+                }
+            });
         }
     }
 
@@ -100,7 +119,17 @@ function AuthContextProvider(props) {
             }
         } catch (error) {
             console.log(error.response.data.errorMessage);
+            authReducer({
+                type: AuthActionType.ERROR,
+                payload: {
+                    errorMessage: error.response.data.errorMessage
+                }
+            });
         }
+    }
+
+    auth.isErrorModalOpen = () => {
+        return auth.errorMessage !== "";
     }
 
     auth.logoutUser = async function() {
