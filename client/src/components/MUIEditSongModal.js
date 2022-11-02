@@ -66,10 +66,10 @@ export default function MUIEditSongModal() {
                     id="edit-song-modal-content"
                     className="modal-control">
                         <form>
-                                <div class="col-left">
+                                <div className="col-left">
                                     <label for="edit-song-modal-title">Title:</label>
                                 </div> 
-                                <div class="col-right">
+                                <div className="col-right">
                                 <input 
                                     id="edit-song-modal-title-textfield" 
                                     className='modal-textfield' 
@@ -77,10 +77,10 @@ export default function MUIEditSongModal() {
                                     defaultValue={title} 
                                     onChange={handleUpdateTitle} /><br/>
                                 </div>
-                                <div class="col-left">
+                                <div className="col-left">
                                     <label for="edit-song-modal-artist">Artist:</label>
                                 </div> 
-                                <div class="col-right">
+                                <div className="col-right">
                                 <input 
                                     id="edit-song-modal-artist-textfield" 
                                     className='modal-textfield' 
@@ -88,10 +88,10 @@ export default function MUIEditSongModal() {
                                     defaultValue={artist} 
                                     onChange={handleUpdateArtist} /><br/>
                                 </div>
-                                <div class="col-left">
+                                <div className="col-left">
                                     <label for="edit-song-modal-youtube-id">Youtube Id:</label>
                                 </div> 
-                                <div class="col-right">
+                                <div className="col-right">
                                 <input 
                                     id="edit-song-modal-youTubeId-textfield" 
                                     className='modal-textfield' 

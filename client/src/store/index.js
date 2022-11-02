@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import jsTPS from '../common/jsTPS'
 import api from './store-request-api'
@@ -46,6 +46,30 @@ const CurrentModal = {
 // WITH THIS WE'RE MAKING OUR GLOBAL DATA STORE
 // AVAILABLE TO THE REST OF THE APPLICATION
 function GlobalStoreContextProvider(props) {
+
+     // HANDLE KEY PRESSES. UNDO IF CTRL+Z, REDO IF CTRL+Y
+     const handleKeyPress = useCallback((event) => {
+        if (event.ctrlKey) {
+            if (event.key === 'z') {
+                store.undo()
+            }
+            if (event.key === 'y') {
+                store.redo()
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        // ATTACH THE EVENT LISTENER
+        document.addEventListener('keydown', handleKeyPress);
+
+        // REMOVE THE EVENT LISTENER
+        return () => {
+            document.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [handleKeyPress]);
+
+
     // THESE ARE ALL THE THINGS OUR DATA STORE WILL MANAGE
     const [store, setStore] = useState({
         currentModal : CurrentModal.NONE,
@@ -449,7 +473,7 @@ function GlobalStoreContextProvider(props) {
     store.addNewSong = () => {
         let playlistSize = store.getPlaylistSize();
         store.addCreateSongTransaction(
-            playlistSize, "Untitled", "?", "dQw4w9WgXcQ");
+            playlistSize, "Untitled", "Unknown", "dQw4w9WgXcQ");
     }
     // THIS FUNCDTION ADDS A CreateSong_Transaction TO THE TRANSACTION STACK
     store.addCreateSongTransaction = (index, title, artist, youTubeId) => {
