@@ -67,7 +67,7 @@ export default function MUIEditSongModal() {
                     className="modal-control">
                         <form>
                                 <div className="col-left">
-                                    <label for="edit-song-modal-title">Title:</label>
+                                    <label htmlFor="edit-song-modal-title">Title:</label>
                                 </div> 
                                 <div className="col-right">
                                 <input 
@@ -78,7 +78,7 @@ export default function MUIEditSongModal() {
                                     onChange={handleUpdateTitle} /><br/>
                                 </div>
                                 <div className="col-left">
-                                    <label for="edit-song-modal-artist">Artist:</label>
+                                    <label htmlFor="edit-song-modal-artist">Artist:</label>
                                 </div> 
                                 <div className="col-right">
                                 <input 
@@ -89,7 +89,7 @@ export default function MUIEditSongModal() {
                                     onChange={handleUpdateArtist} /><br/>
                                 </div>
                                 <div className="col-left">
-                                    <label for="edit-song-modal-youtube-id">Youtube Id:</label>
+                                    <label htmlFor="edit-song-modal-youtube-id">Youtube Id:</label>
                                 </div> 
                                 <div className="col-right">
                                 <input 

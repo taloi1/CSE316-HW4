@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { GlobalStoreContext } from '../store'
+import AuthContext from '../auth'
 import { Typography } from '@mui/material'
 
 /*
@@ -9,13 +10,18 @@ import { Typography } from '@mui/material'
 */
 function Statusbar() {
     const { store } = useContext(GlobalStoreContext);
+    const { auth } = useContext(AuthContext);
     let text ="";
+    let statusName = "statusbar";
+    if (auth.user !== null) {
+        statusName = "statusbar-visible"
+    }
     if (store.currentList)
         text = store.currentList.name;
     return (
-        <div id="playlister-statusbar">
+        <div id="playlister-statusbar" className={statusName}>
             <Typography variant="h4">{text}</Typography>
-        </div>
+        </div> 
     );
 }
 
