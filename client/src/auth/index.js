@@ -60,7 +60,7 @@ function AuthContextProvider(props) {
             case AuthActionType.ERROR: {
                 return setAuth({
                     user: null,
-                    loggedIn: true,
+                    loggedIn: false,
                     errorMessage: payload.errorMessage,
                 })
             }
@@ -126,6 +126,15 @@ function AuthContextProvider(props) {
                 }
             });
         }
+    }
+
+    auth.hideModal = () => {
+        authReducer({
+            type: AuthActionType.ERROR,
+            payload: {
+                errorMessage: ""
+            }
+        });
     }
 
     auth.isErrorModalOpen = () => {
