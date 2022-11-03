@@ -9,10 +9,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
+    width: '50%',
     p: 4,
 };
 
@@ -64,7 +61,7 @@ export default function MUIEditSongModal() {
                     className="modal-header">Edit Song</div>
                 <div
                     id="edit-song-modal-content"
-                    className="modal-control">
+                    className="modal-center">
                         <form>
                                 <div className="col-left">
                                     <label htmlFor="edit-song-modal-title">Title:</label>
