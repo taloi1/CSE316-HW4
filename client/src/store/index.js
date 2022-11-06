@@ -94,6 +94,8 @@ function GlobalStoreContextProvider(props) {
     // HANDLE EVERY TYPE OF STATE CHANGE
     const storeReducer = (action) => {
         const { type, payload } = action;
+        console.log(type);
+        console.log(payload);
         switch (type) {
             // LIST UPDATE OF ITS NAME
             case GlobalStoreActionType.CHANGE_LIST_NAME: {
@@ -520,22 +522,24 @@ function GlobalStoreContextProvider(props) {
         asyncUpdateCurrentList();
     }
     store.undo = function () {
-        tps.undoTransaction();
+        if (store.currentModal === CurrentModal.NONE)
+            tps.undoTransaction();
     }
     store.redo = function () {
-        tps.doTransaction();
+        if (store.currentModal === CurrentModal.NONE)
+            tps.doTransaction();
     }
     store.canAddNewSong = function() {
-        return (store.currentList !== null);
+        return ((store.currentList !== null) && store.currentModal === CurrentModal.NONE);
     }
     store.canUndo = function() {
-        return ((store.currentList !== null) && tps.hasTransactionToUndo());
+        return ((store.currentList !== null) && tps.hasTransactionToUndo() && store.currentModal === CurrentModal.NONE);
     }
     store.canRedo = function() {
-        return ((store.currentList !== null) && tps.hasTransactionToRedo());
+        return ((store.currentList !== null) && tps.hasTransactionToRedo() && store.currentModal === CurrentModal.NONE);
     }
     store.canClose = function() {
-        return (store.currentList !== null);
+        return ((store.currentList !== null) && store.currentModal === CurrentModal.NONE);
     }
 
     // THIS FUNCTION ENABLES THE PROCESS OF EDITING A LIST NAME
