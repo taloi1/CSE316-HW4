@@ -96,6 +96,7 @@ function GlobalStoreContextProvider(props) {
         const { type, payload } = action;
         console.log(type);
         console.log(payload);
+        console.log(store.currentModal);
         switch (type) {
             // LIST UPDATE OF ITS NAME
             case GlobalStoreActionType.CHANGE_LIST_NAME: {
@@ -291,7 +292,6 @@ function GlobalStoreContextProvider(props) {
     store.createNewList = async function () {
         let newListName = "Untitled" + store.newListCounter;
         const response = await api.createPlaylist(newListName, [], auth.user.email);
-        console.log("createNewList response: " + response);
         if (response.status === 201) {
             tps.clearAllTransactions();
             let newList = response.data.playlist;

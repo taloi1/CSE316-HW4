@@ -5,6 +5,11 @@ import MUIEditSongModal from './MUIEditSongModal'
 import MUIRemoveSongModal from './MUIRemoveSongModal'
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
+import Modal from '@mui/material/Modal';
+import Stack from '@mui/material/Stack';
+import AlertTitle from '@mui/material/AlertTitle';
+import { Alert } from '@mui/material';
+import Button from '@mui/material/Button';
 import { GlobalStoreContext } from '../store/index.js'
 import AuthContext from '../auth/index.js'
 /*
@@ -18,9 +23,14 @@ function WorkspaceScreen() {
     const { auth } = useContext(AuthContext);
     store.history = useHistory();
     
+    function handleCloseModal(event) {
+        auth.logoutUser();
+    }
+
+    let errorMessage = "";
     let modalJSX = "";
     if (auth.user === null) {
-        store.history.push("/");
+        errorMessage = "User not found, log in again";
     }
     if (store.isEditSongModalOpen()) {
         modalJSX = <MUIEditSongModal />;
@@ -48,14 +58,34 @@ function WorkspaceScreen() {
          </List>; 
          if (auth.user)  {
             if (auth.user.email !== store.currentList.ownerEmail) {
-                auth.logoutUser();
+                errorMessage = "User does not own this playlist";
             }   
          }          
     }
+    let errorModal = "";
+    if (errorMessage !== "") {
+        errorModal = <Modal
+            open={errorMessage !== ""}
+        >
+            <Stack sx={{ width: '40%', marginLeft: '30%', marginTop: '20%' }} spacing={2}>
+                <Alert severity="error">
+                    <AlertTitle>Error</AlertTitle>
+                    {errorMessage}
+                    <Button color="primary" size="small" onClick={handleCloseModal}>
+                            Close
+                    </Button>
+                </Alert>
+            </Stack>
+        </Modal>
+    }
+
+
+
     return (
         <Box style={{maxHeight: '83%', overflow: 'auto'}}>
          { songList }
          { modalJSX }
+         { errorModal }
          </Box>
     )
 }
